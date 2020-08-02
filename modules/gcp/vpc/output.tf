@@ -18,6 +18,12 @@ output "network_name" {
 
 }
 
+output "subnetwork_id" {
+
+  value = google_compute_subnetwork.gcp-lab-subnet.id
+
+}
+
 /*
 
 output "subnetwork_name" {
@@ -26,11 +32,7 @@ output "subnetwork_name" {
 
 }
 
-output "subnetwork_id" {
 
-  value = google_compute_subnetwork.gcp-lab-subnet.id
-
-}
 
 
 
