@@ -1,4 +1,4 @@
-output "region" {
+/* output "region" {
 
   value = google_compute_subnetwork.gcp-lab-subnet.region
 
@@ -9,7 +9,7 @@ output "project" {
   value = google_compute_subnetwork.gcp-lab-subnet.project
 
 }
-
+/* 
 
 
 output "network_name" {
