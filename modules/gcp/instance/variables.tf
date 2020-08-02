@@ -1,3 +1,11 @@
+variable "region" {
+  default = ""
+  }
+
+variable "project" {
+  default = ""
+  }
+
 variable "instance_template_name" {
 
   description = "Name prefix for the instance template"
