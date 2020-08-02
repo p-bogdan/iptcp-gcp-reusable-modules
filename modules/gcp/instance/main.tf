@@ -90,7 +90,7 @@ metadata_startup_script    = file("${path.root}/scripts/${var.startup-script}")
 
     {
 
-      project_id         = var.project
+      #project_id         = var.project
 
       cloud_sql_password = var.sql_user_password
 
@@ -114,7 +114,7 @@ resource "google_compute_region_instance_group_manager" "bookshelf-app-group" {
 
   name = var.instance_group_name
 
-  region = var.region
+  #region = var.region
 
 
 
@@ -174,7 +174,7 @@ resource "google_compute_region_autoscaler" "instances-autoscaler" {
   name     = "${var.instance_template_name}-autoscaler"
 
 
-  region   = var.region
+  #region   = var.region
 
   target   = google_compute_region_instance_group_manager.bookshelf-app-group.id
 
