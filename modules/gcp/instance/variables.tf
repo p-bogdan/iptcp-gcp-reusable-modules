@@ -1,10 +1,10 @@
-variable "region" {
-  default = ""
-  }
+#variable "region" {
+#  default = ""
+#  }
 
-variable "project" {
-  default = ""
-  }
+#variable "project" {
+#  default = ""
+#  }
 
 variable "instance_template_name" {
 
