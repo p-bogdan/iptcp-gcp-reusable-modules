@@ -18,7 +18,7 @@ output "network_name" {
 
 }
 
-
+/*
 
 output "subnetwork_name" {
 
@@ -50,7 +50,7 @@ output "subnetwork_self_link" {
 
 
 
-/* output "proxy-subnet-id" {
+ output "proxy-subnet-id" {
 
  value = google_compute_subnetwork.proxy-subnet.id 
 
