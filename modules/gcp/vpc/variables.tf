@@ -2,13 +2,13 @@
 
 variable "project" {
 
-default = "gcp-training-iptcp"
+default = ""
 
 }
 
 variable "region" {
 
-default = "europe-west1"
+default = ""
 
 }
 
