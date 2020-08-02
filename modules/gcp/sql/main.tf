@@ -9,12 +9,11 @@ resource "random_id" "instance_name_suffix" {
 resource "google_sql_database_instance" "gcp-lab-sql-instance" {
 
   
+name   = "bookshelf-instance-${random_id.instance_name_suffix.hex}"
 
-  name   = "bookshelf-instance-${random_id.instance_name_suffix.hex}"
+region = var.region
 
-  region = var.region
-
-  database_version = "MYSQL_5_7"
+database_version = "MYSQL_5_7"
 
 #  depends_on = [google_service_networking_connection.private_vpc_connection]
 
@@ -24,7 +23,7 @@ resource "google_sql_database_instance" "gcp-lab-sql-instance" {
 
 #   depends_on  = [var.private_vpc_connection]
 
-  depends_on  = [google_service_networking_connection.private_vpc_connection]
+depends_on  = [google_service_networking_connection.private_vpc_connection]
 
 
 

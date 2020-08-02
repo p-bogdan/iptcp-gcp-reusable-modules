@@ -38,7 +38,7 @@ metadata_startup_script    = file("${path.root}/scripts/${var.startup-script}")
 
   service_account {
 
-    email  = "terraform-sa@gcp-training-iptcp.iam.gserviceaccount.com"
+    email  = var.email
 
     scopes = ["cloud-platform"]
 

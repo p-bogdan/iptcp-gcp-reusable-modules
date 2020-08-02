@@ -22,6 +22,10 @@ variable "machine_type" {
 
 }
 
+variable "email" {
+  default = ""
+}
+
 variable "network_name" {
 
 default = ""
