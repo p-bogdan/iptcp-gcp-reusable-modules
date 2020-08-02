@@ -1,3 +1,15 @@
+output "network_name" {
+
+  value = google_compute_network.gcp-lab-network.name
+
+}
+
+output "subnetwork_id" {
+
+  value = google_compute_subnetwork.gcp-lab-subnet.id
+
+}
+
 /* output "region" {
 
   value = google_compute_subnetwork.gcp-lab-subnet.region
