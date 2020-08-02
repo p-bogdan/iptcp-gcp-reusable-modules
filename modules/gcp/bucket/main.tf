@@ -16,5 +16,6 @@ resource "google_storage_bucket_acl" "image-store-acl" {
   bucket = google_storage_bucket.bookshelf-data.name
 
   role_entity = [
-    var.role_entity
+    var.role_entity,
   ]
+}
