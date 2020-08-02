@@ -6,5 +6,5 @@ variable "location" {
     default = ""
 }
 variable "project" {
-    default = ""
+    default = "lab-project-282605"
     }
