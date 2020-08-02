@@ -5,10 +5,16 @@ resource "google_storage_bucket" "bookshelf-data" {
 }
 
 
-resource "google_storage_default_object_access_control" "public_rule" {
-  bucket = google_storage_bucket.bookshelf-data.id
-  role   = "READER"
-  entity = var.entity
-  depends_on = [google_storage_bucket.bookshelf-data]
-}
+# resource "google_storage_default_object_access_control" "public_rule" {
+#   bucket = google_storage_bucket.bookshelf-data.id
+#   role   = "READER"
+#   entity = var.entity
+#   depends_on = [google_storage_bucket.bookshelf-data]
+# }
 
+resource "google_storage_bucket_acl" "image-store-acl" {
+  bucket = google_storage_bucket.bookshelf-data.name
+
+  role_entity = [
+    var.role_entity
+  ]

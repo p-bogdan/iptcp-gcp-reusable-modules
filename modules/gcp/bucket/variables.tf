@@ -6,6 +6,9 @@ variable "location" {
     default = ""
 }
 
-variable "entity" {
+# variable "entity" {
+#     default = ""
+#     }
+variable "role_entity" {
     default = ""
     }
