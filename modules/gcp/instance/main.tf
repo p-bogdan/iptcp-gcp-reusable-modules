@@ -114,7 +114,7 @@ resource "google_compute_region_instance_group_manager" "bookshelf-app-group" {
 
   name = var.instance_group_name
 
-  #region = var.region
+  region = var.region
 
 
 
