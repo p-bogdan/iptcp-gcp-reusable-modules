@@ -18,7 +18,7 @@ variable "network_name" {
 
 description = "custom network name for gcp lab"
 
-default = "gcp-lab-network"
+default = ""
 
 }
 
@@ -60,7 +60,7 @@ variable "ipv4_range_backends" {
 
 #default = "10.132.0.0/20"
 
-default = "10.132.1.0/24"
+default = ""
 
 }
 
