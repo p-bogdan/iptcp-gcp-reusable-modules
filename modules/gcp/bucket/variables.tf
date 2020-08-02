@@ -5,3 +5,6 @@ variable "random_id_hex" {
 variable "location" {
     default = ""
 }
+variable "project" {
+    default = ""
+    }
