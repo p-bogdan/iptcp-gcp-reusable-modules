@@ -10,6 +10,12 @@ output "subnetwork_id" {
 
 }
 
+output "subnet_ipv4_range" {
+
+value = google_compute_subnetwork.gcp-lab-subnet.ip_cidr_range  
+
+}
+
 /* output "region" {
 
   value = google_compute_subnetwork.gcp-lab-subnet.region
@@ -48,11 +54,6 @@ output "subnetwork_name" {
 
 
 
-output "subnet_ipv4_range" {
-
-value = google_compute_subnetwork.gcp-lab-subnet.ip_cidr_range  
-
-}
 
 
 
