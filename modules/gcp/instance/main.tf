@@ -84,9 +84,9 @@ metadata_startup_script    = file("${path.root}/scripts/${var.startup-script}")
 
        resource "local_file" "tf_ansible_vars_file" {
 
-   #  content  = base64encode(yamlencode(
+     content  = base64encode(yamlencode(
 
-    content  = yamlencode(
+  #  content  = yamlencode(
 
     {
 
@@ -105,6 +105,7 @@ metadata_startup_script    = file("${path.root}/scripts/${var.startup-script}")
     }
 
   )
+     )
 
   filename = "${path.root}/ansible/${var.tf_ansible_vars_file}"
 
