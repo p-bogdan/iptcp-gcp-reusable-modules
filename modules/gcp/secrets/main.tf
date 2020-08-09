@@ -14,7 +14,6 @@
   } 
 }
 
-
 resource "google_secret_manager_secret_version" "secret-version-basic" {
    depends_on = [var.local_file]
    secret = google_secret_manager_secret.secret-basic.id
