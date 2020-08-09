@@ -90,7 +90,7 @@ metadata_startup_script    = file("${path.root}/scripts/${var.startup-script}")
 
     {
 
-      #project_id         = var.project
+      project_id         = var.project
 
       cloud_sql_password = var.sql_user_password
 
