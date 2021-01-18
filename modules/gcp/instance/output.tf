@@ -36,11 +36,11 @@ value = google_compute_region_instance_group_manager.bookshelf-app-group.instanc
 
 }
 
-#  output "local_file" {
+ output "local_file" {
 
-# value = local_file.tf_ansible_vars_file
+value = local_file.tf_ansible_vars_file
 
-# }  
+}  
 
 
 
