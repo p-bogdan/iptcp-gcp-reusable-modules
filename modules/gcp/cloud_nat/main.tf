@@ -1,13 +1,8 @@
 resource "google_compute_router" "cloud_nat_router" {
   name    = "cloud-router"
   region  = var.region
- # network = google_compute_network.net.id
   network       = var.network_self_link
 }
-  #bgp {
-  #  asn = 64514
-  #}
-
 
 resource "google_compute_router_nat" "cloud-router-nat" {
   name                               = "cloud-router-nat"
