@@ -22,11 +22,11 @@ variable "issue_client_certificate" {
 }
 
 variable "cluster_name" {
-    default = "my-gke-cluster"
+    default = ""
 }
 
 variable "node_count" {
-    default = "3"
+    default = ""
 }
 
 variable "machine_type" {
