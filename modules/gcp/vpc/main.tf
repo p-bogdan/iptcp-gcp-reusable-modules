@@ -60,7 +60,7 @@ resource "google_compute_firewall" "gcp-tag-http" {
   description   = "Allow HTTP to machines with the 'load-balanced-backend' tags"
   network       = google_compute_network.gcp-lab-network.self_link
   project       = var.project
-  source_ranges = [var.source_ranges_backends, var.healthcheck_subnet_range]
+  source_ranges = ["${var.source_ranges_backends}", "${var.healthcheck_subnet_range}"]
   direction     = "INGRESS"
   target_tags   = ["load-balanced-backend", "allow-health-check"]
 
