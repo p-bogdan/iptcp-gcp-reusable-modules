@@ -27,7 +27,8 @@ resource "google_compute_firewall" "internal-routing" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8080", "443", "3306", "22"]
+    #ports    = ["80", "8080", "443", "3306", "22"]
+    ports  = [var.fw_ports]
   }
 
   allow {

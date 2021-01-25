@@ -38,21 +38,16 @@ default = ""
 variable "source_ranges" {
 type        = list(string)
 description = "List of CIDR block ranges"
-#default     = ["0.0.0.0/0"]
 default      = [""]
 }
-
-# variable "healthcheck_subnet_range" {
-# type        = list(string)
-# description = "List of CIDR block ranges"
-# default     = [""]
-# #default     = ["130.211.0.0/22", "35.191.0.0/16", "209.85.152.0/22", "209.85.204.0/22"]
-# }
 
 variable "target-http-proxy_id" {
 default = ""    
 }
-
-
+variable "fw_ports" {
+type        = list(string)
+description = "List of CIDR block ranges"
+default      = [""]
+}
 
 
