@@ -21,7 +21,7 @@ resource "google_compute_firewall" "internal-routing" {
   name = "${var.network_name}-internal-fw-rules"
   count         = length(var.source_ranges_backends) > 0 ? 1 : 0
   network       = google_compute_network.gcp-lab-network.self_link
-  source_ranges = concat(var.source_ranges_backends, var.healthcheck_subnet_range)
+  source_ranges = var.source_ranges
   project       = var.project
   target_tags   = ["load-balanced-backend", "allow-health-check", "allow-ssh"]
 
