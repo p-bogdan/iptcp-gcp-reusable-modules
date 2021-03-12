@@ -41,7 +41,7 @@ variable "auto_repair" {
 }
 
 variable "auto_upgrade" {
-    default = false
+    default = true
 }
 
 variable "cluster_version" {
