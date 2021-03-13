@@ -20,16 +20,16 @@ resource "google_container_cluster" "primary" {
        issue_client_certificate = var.issue_client_certificate
      }
    }
-
   addons_config {
+    horizontal_pod_autoscaling {
+      disabled = true
+    }
     http_load_balancing {
       disabled = true
     }
-    #added just for visibility, by default it's enabled
-    kubernetes_dashboard {
-      disabled = false
+    network_policy_config {
+      disabled = true
     }
-
   }
 
 }
