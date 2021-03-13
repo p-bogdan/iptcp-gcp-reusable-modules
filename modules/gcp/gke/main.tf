@@ -25,6 +25,10 @@ resource "google_container_cluster" "primary" {
     http_load_balancing {
       disabled = true
     }
+    #added just for visibility, by default it's enabled
+    kubernetes_dashboard {
+      disabled = false
+    }
 
   }
 
