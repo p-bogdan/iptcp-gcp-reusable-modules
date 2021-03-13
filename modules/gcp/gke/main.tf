@@ -2,6 +2,24 @@
 data "google_client_config" "default" {}
 data "google_container_cluster" "gke_cluster" {}
 
+data "template_file" "kubeconfig" {
+  template = file("${path.module}/kubeconfig-template.yaml.tpl")
+
+  vars = {
+    context                = data.google_container_cluster.primary.name
+    cluster_ca_certificate = data.google_container_cluster.primary.master_auth
+    endpoint               = data.google_container_cluster.primary.endpoint
+    token                  = data.google_client_config.default.access_token
+  }
+}
+
+
+resource "local_file" "kubeconfig" {
+  content  = data.template_file.kubeconfig.rendered
+  filename = "${path.module}/.kube/config"
+}
+
+
 resource "google_container_cluster" "primary" {
   name     = var.cluster_name
   # node_locations = [
