@@ -1,6 +1,6 @@
 #Retrieve authentication token
 data "google_client_config" "default" {}
-
+data "google_container_cluster" "gke_cluster" {}
 
 resource "google_container_cluster" "primary" {
   name     = var.cluster_name
@@ -69,6 +69,5 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     ]
   }
 }
-
 
   
