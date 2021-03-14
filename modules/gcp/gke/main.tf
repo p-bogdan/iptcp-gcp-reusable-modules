@@ -104,7 +104,7 @@ data "template_file" "kubeconfig" {
 
 resource "local_file" "kubeconfig" {
   content  = data.template_file.kubeconfig.rendered
-  filename = "~/.kube/kubeconfig-${var.env}"
+  filename = "~/.kube/config"
 }  
 
 # resource "kubernetes_deployment" "example" {
