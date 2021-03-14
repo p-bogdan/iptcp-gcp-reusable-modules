@@ -1,19 +1,5 @@
-
-# locals {
-#   cluster_ca_certificate = data.google_container_cluster.default.master_auth != null ? data.google_container_cluster.default.master_auth[0].cluster_ca_certificate : ""
-#   private_endpoint       = try(data.google_container_cluster.default.private_cluster_config[0].private_endpoint, "")
-#   default_endpoint       = data.google_container_cluster.default.endpoint != null ? data.google_container_cluster.default.endpoint : ""
-#   #endpoint               = var.use_private_endpoint == true ? local.private_endpoint : local.default_endpoint
-#   endpoint               = local.default_endpoint
-#   host                   = local.endpoint != "" ? "https://${local.endpoint}" : ""
-#   context                = data.google_container_cluster.default.name != null ? data.google_container_cluster.default.name : ""
-# }
-
 resource "google_container_cluster" "primary" {
   name     = var.cluster_name
-  # node_locations = [
-  #   var.zone,
-  # ]
   location = var.zone
   project    = var.project
   remove_default_node_pool = var.remove_default_node_pool
@@ -69,10 +55,6 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     oauth_scopes = [
 
       "https://www.googleapis.com/auth/cloud-platform"
-      #"https://www.googleapis.com/auth/compute",
-      #"https://www.googleapis.com/auth/devstorage.read_only",
-      #"https://www.googleapis.com/auth/logging.write",
-      #"https://www.googleapis.com/auth/monitoring"
     ]
   }
 }
@@ -85,9 +67,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   location = var.zone
   project  = var.project
  }
-# data "google_container_cluster" "primary" {
-#   name = google_container_node_pool.primary.name
-# }
+
  data "google_client_config" "default" {}
 
 data "template_file" "kubeconfig" {
@@ -107,65 +87,65 @@ resource "local_file" "kubeconfig" {
   filename = pathexpand("~/.kube/config")
 }  
 
-# resource "kubernetes_deployment" "example" {
-#   metadata {
-#     name = "terraform-example"
-#     labels = {
-#       app = "MyExampleApp"
-#     }
-#   }
+resource "kubernetes_deployment" "example" {
+  metadata {
+    name = "terraform-example"
+    labels = {
+      app = "MyExampleApp"
+    }
+  }
 
-#   spec {
-#     replicas = 3
+  spec {
+    replicas = 3
 
-#     selector {
-#       match_labels = {
-#         test = "MyExampleApp"
-#       }
-#     }
+    selector {
+      match_labels = {
+        test = "MyExampleApp"
+      }
+    }
 
-#     template {
-#       metadata {
-#         labels = {
-#           test = "MyExampleApp"
-#         }
-#       }
+    template {
+      metadata {
+        labels = {
+          test = "MyExampleApp"
+        }
+      }
 
-#       spec {
-#         container {
-#           image = "nginx:1.7.8"
-#           name  = "example"
+      spec {
+        container {
+          image = "nginx:1.7.8"
+          name  = "example"
 
-#           resources {
-#             limits = {
-#               cpu    = "0.5"
-#               memory = "512Mi"
-#             }
-#             requests = {
-#               cpu    = "250m"
-#               memory = "50Mi"
-#             }
-#           }
+          resources {
+            limits = {
+              cpu    = "0.5"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "250m"
+              memory = "50Mi"
+            }
+          }
 
-#           liveness_probe {
-#             http_get {
-#               path = "/nginx_status"
-#               port = 80
+          liveness_probe {
+            http_get {
+              path = "/nginx_status"
+              port = 80
 
-#               http_header {
-#                 name  = "X-Custom-Header"
-#                 value = "Awesome"
-#               }
-#             }
+              http_header {
+                name  = "X-Custom-Header"
+                value = "Awesome"
+              }
+            }
 
-#             initial_delay_seconds = 3
-#             period_seconds        = 3
-#           }
-#         }
-#       }
-#     }
-#   }
-# }
+            initial_delay_seconds = 3
+            period_seconds        = 3
+          }
+        }
+      }
+    }
+  }
+}
 # resource "kubernetes_service" "example" {
 #   metadata {
 #     name = "terraform-example"
