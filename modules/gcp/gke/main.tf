@@ -76,6 +76,10 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     ]
   }
 }
+provisioner "local-exec" {
+    command = "gcloud container clusters get-credentials ${google_container_cluster.primary.name} --zone  ${google_container_cluster.primary.zone} --project ${var.project}"
+}
+
 
 # # #Retrieve authentication token
 #  data "google_client_config" "default" {}
