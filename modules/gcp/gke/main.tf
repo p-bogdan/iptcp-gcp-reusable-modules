@@ -150,6 +150,10 @@ resource "kubernetes_deployment" "nginx" {
 resource "kubernetes_service" "example" {
   metadata {
     name = "terraform-example"
+    namespace = "app"
+    labels = {
+      app = "ScalableNginxExample"
+    }
   }
   spec {
     selector = {
@@ -158,7 +162,7 @@ resource "kubernetes_service" "example" {
     session_affinity = "ClientIP"
     port {
       port        = 8080
-      target_port = 80
+      protocol    = "TCP"
     }
 
     type = "LoadBalancer"
