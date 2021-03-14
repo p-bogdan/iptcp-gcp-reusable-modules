@@ -104,7 +104,7 @@ data "template_file" "kubeconfig" {
 
 resource "local_file" "kubeconfig" {
   content  = data.template_file.kubeconfig.rendered
-  filename = "~/.kube/config"
+  filename = "$HOME/.kube/config"
 }  
 
 # resource "kubernetes_deployment" "example" {
