@@ -192,6 +192,7 @@ resource "kubernetes_service" "example" {
     session_affinity = "ClientIP"
     port {
       port        = 8080
+      target_port = 8080
       protocol    = "TCP"
     }
 
