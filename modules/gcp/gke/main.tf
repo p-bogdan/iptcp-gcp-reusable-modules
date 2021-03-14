@@ -79,7 +79,7 @@ data "template_file" "kubeconfig" {
     context                = google_container_cluster.primary.name
     cluster_ca_certificate = google_container_cluster.primary.master_auth
     endpoint               = google_container_cluster.primary.endpoint
-    token                  = google_client_config.default.access_token
+    token                  = google_container_cluster.primary.access_token
   }
 }
 
