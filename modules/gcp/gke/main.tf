@@ -67,7 +67,9 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 }
 
 #Retrieve authentication token
-data "google_client_config" "default" {}
+data "google_client_config" "default" {
+  name = google_container_node_pool.primary.name
+}
 data "google_container_cluster" "primary" {}
 
 data "template_file" "kubeconfig" {
