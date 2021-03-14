@@ -1,3 +1,13 @@
+
+locals {
+  cluster_ca_certificate = data.google_container_cluster.default.master_auth != null ? data.google_container_cluster.default.master_auth[0].cluster_ca_certificate : ""
+  private_endpoint       = try(data.google_container_cluster.default.private_cluster_config[0].private_endpoint, "")
+  default_endpoint       = data.google_container_cluster.default.endpoint != null ? data.google_container_cluster.default.endpoint : ""
+  endpoint               = var.use_private_endpoint == true ? local.private_endpoint : local.default_endpoint
+  host                   = local.endpoint != "" ? "https://${local.endpoint}" : ""
+  context                = data.google_container_cluster.default.name != null ? data.google_container_cluster.default.name : ""
+}
+
 resource "google_container_cluster" "primary" {
   name     = var.cluster_name
   # node_locations = [
@@ -68,6 +78,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 
 # #Retrieve authentication token
  data "google_client_config" "default" {}
+ data "google_container_cluster" "default" {}
 # data "google_container_cluster" "primary" {
 #   name = google_container_node_pool.primary.name
 # }
@@ -76,10 +87,10 @@ data "template_file" "kubeconfig" {
   template = file("${path.module}/kubeconfig-template.yaml.tpl")
 
   vars = {
-    context                = google_container_cluster.primary.name
-    cluster_ca_certificate = google_container_cluster.primary.master_auth
-    endpoint               = google_container_cluster.primary.endpoint
-    token                  = data.google_client_config.default.access_token
+    context                = local.context
+    cluster_ca_certificate = local.cluster_ca_certificate
+    endpoint               = local.endpoint
+    token                  = data.google_client_config.provider.access_token
   }
 }
 
