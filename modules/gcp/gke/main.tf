@@ -94,7 +94,7 @@ data "template_file" "kubeconfig" {
   vars = {
     context                = local.context
     cluster_ca_certificate = local.cluster_ca_certificate
-    endpoint               = local.endpoint
+    endpoint               = google_container_cluster.primary.endpoint
     token                  = data.google_client_config.default.access_token
   }
 }
