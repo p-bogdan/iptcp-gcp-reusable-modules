@@ -76,35 +76,32 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
     ]
   }
 }
-provisioner "local-exec" {
-    command = "gcloud container clusters get-credentials ${google_container_cluster.primary.name} --zone  ${google_container_cluster.primary.zone} --project ${var.project}"
+
+
+# #Retrieve authentication token
+ data "google_client_config" "default" {}
+ data "google_container_cluster" "default" {
+  name     = var.cluster_name
+  location = var.zone
+  project  = var.project
+ }
+# data "google_container_cluster" "primary" {
+#   name = google_container_node_pool.primary.name
+# }
+
+data "template_file" "kubeconfig" {
+  template = file("${path.module}/kubeconfig-template.yaml.tpl")
+
+  vars = {
+    context                = google_container_cluster.primary.name
+    cluster_ca_certificate = google_container_cluster.primary.master_auth[0].cluster_ca_certificate
+    endpoint               = google_container_cluster.primary.endpoint
+    token                  = data.google_client_config.default.access_token
+  }
 }
 
 
-# # #Retrieve authentication token
-#  data "google_client_config" "default" {}
-#  data "google_container_cluster" "default" {
-#   name     = var.cluster_name
-#   location = var.zone
-#   project  = var.project
-#  }
-# # data "google_container_cluster" "primary" {
-# #   name = google_container_node_pool.primary.name
-# # }
-
-# data "template_file" "kubeconfig" {
-#   template = file("${path.module}/kubeconfig-template.yaml.tpl")
-
-#   vars = {
-#     context                = google_container_cluster.primary.name
-#     cluster_ca_certificate = google_container_cluster.primary.master_auth[0].cluster_ca_certificate
-#     endpoint               = google_container_cluster.primary.endpoint
-#     token                  = data.google_client_config.default.access_token
-#   }
-# }
-
-
-# resource "local_file" "kubeconfig" {
-#   content  = data.template_file.kubeconfig.rendered
-#   filename = "${path.module}/.kube/config"
-# }  
+resource "local_file" "kubeconfig" {
+  content  = data.template_file.kubeconfig.rendered
+  filename = "kubeconfig-staging"
+}  
