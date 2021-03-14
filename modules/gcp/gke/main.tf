@@ -150,6 +150,7 @@ resource "kubernetes_deployment" "nginx" {
 resource "kubernetes_endpoints" "example" {
   metadata {
     name = "terraform-example"
+    namespace = "app"
   }
 
   subset {
