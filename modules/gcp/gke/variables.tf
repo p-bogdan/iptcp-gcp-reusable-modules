@@ -8,17 +8,17 @@ variable "project" {
 
 variable "remove_default_node_pool" {
     type = bool
-    default = true
+    default = ""
 }
 
 variable "preemptible" {
     type = bool
-    default = false
+    default = ""
 }
 
 variable "issue_client_certificate" {
     type = bool
-    default = false
+    default = ""
 }
 
 variable "cluster_name" {
@@ -29,21 +29,26 @@ variable "node_count" {
     default = ""
 }
 
+
 variable "machine_type" {
-  default = "n1-standard-1"
+  default = ""
 }
 variable "disk_size_gb" {
-    default = 10
+    default = ""
 }
 variable "auto_repair" {
     type = bool
-    default = true
+    default = ""
 }
 
 variable "auto_upgrade" {
-    default = true
+    default = ""
 }
 
 variable "cluster_version" {
+    default = ""
+}
+
+variable "env" {
     default = ""
 }
