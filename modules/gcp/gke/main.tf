@@ -104,7 +104,7 @@ resource "kubernetes_namespace" "app" {
 resource "kubernetes_deployment" "nginx" {
   metadata {
     name = "scalable-nginx-example"
-    namespace = kubernetes_namespace.app.name
+    namespace = kubernetes_namespace.app.metadata.0.name
     labels = {
       App = "ScalableNginxExample"
     }
