@@ -87,34 +87,35 @@ resource "local_file" "kubeconfig" {
   filename = pathexpand("~/.kube/config")
 }  
 
-resource "kubernetes_deployment" "example" {
+resource "kubernetes_deployment" "nginx" {
   metadata {
-    name = "terraform-example"
+    name = "scalable-nginx-example"
     labels = {
-      app = "MyExampleApp"
+      App = "ScalableNginxExample"
     }
   }
 
   spec {
-    replicas = 3
-
+    replicas = 2
     selector {
       match_labels = {
-        test = "MyExampleApp"
+        App = "ScalableNginxExample"
       }
     }
-
     template {
       metadata {
         labels = {
-          test = "MyExampleApp"
+          App = "ScalableNginxExample"
         }
       }
-
       spec {
         container {
           image = "nginx:1.7.8"
           name  = "example"
+
+          port {
+            container_port = 80
+          }
 
           resources {
             limits = {
@@ -125,21 +126,6 @@ resource "kubernetes_deployment" "example" {
               cpu    = "250m"
               memory = "50Mi"
             }
-          }
-
-          liveness_probe {
-            http_get {
-              path = "/nginx_status"
-              port = 80
-
-              http_header {
-                name  = "X-Custom-Header"
-                value = "Awesome"
-              }
-            }
-
-            initial_delay_seconds = 3
-            period_seconds        = 3
           }
         }
       }
