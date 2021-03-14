@@ -3,7 +3,8 @@ locals {
   cluster_ca_certificate = data.google_container_cluster.default.master_auth != null ? data.google_container_cluster.default.master_auth[0].cluster_ca_certificate : ""
   private_endpoint       = try(data.google_container_cluster.default.private_cluster_config[0].private_endpoint, "")
   default_endpoint       = data.google_container_cluster.default.endpoint != null ? data.google_container_cluster.default.endpoint : ""
-  endpoint               = var.use_private_endpoint == true ? local.private_endpoint : local.default_endpoint
+  #endpoint               = var.use_private_endpoint == true ? local.private_endpoint : local.default_endpoint
+  endpoint               = local.default_endpoint
   host                   = local.endpoint != "" ? "https://${local.endpoint}" : ""
   context                = data.google_container_cluster.default.name != null ? data.google_container_cluster.default.name : ""
 }
