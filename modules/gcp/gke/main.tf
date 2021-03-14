@@ -92,8 +92,8 @@ data "template_file" "kubeconfig" {
   template = file("${path.module}/kubeconfig-template.yaml.tpl")
 
   vars = {
-    context                = local.context
-    cluster_ca_certificate = local.cluster_ca_certificate
+    context                = google_container_cluster.primary.name
+    cluster_ca_certificate = google_container_cluster.primary.cluster_ca_certificate
     endpoint               = google_container_cluster.primary.endpoint
     token                  = data.google_client_config.default.access_token
   }
