@@ -1,5 +1,5 @@
 output "k8s-cluster-endpoint" {
-    value = data.google_container_cluster.default.endpoint
+    value = google_container_cluster.primary.endpoint
      sensitive = true
 }
 
