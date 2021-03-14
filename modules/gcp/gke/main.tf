@@ -79,7 +79,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 
 
 # #Retrieve authentication token
- data "google_client_config" "default" {}
+
  data "google_container_cluster" "default" {
   name     = var.cluster_name
   location = var.zone
@@ -88,6 +88,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 # data "google_container_cluster" "primary" {
 #   name = google_container_node_pool.primary.name
 # }
+ data "google_client_config" "default" {}
 
 data "template_file" "kubeconfig" {
   template = file("${path.module}/kubeconfig-template.yaml.tpl")
