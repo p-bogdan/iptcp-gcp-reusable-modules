@@ -66,20 +66,20 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
   }
 }
 
-#Retrieve authentication token
-data "google_client_config" "default" {}
-data "google_container_cluster" "primary" {
-  name = google_container_node_pool.primary.name
-}
+# #Retrieve authentication token
+# data "google_client_config" "default" {}
+# data "google_container_cluster" "primary" {
+#   name = google_container_node_pool.primary.name
+# }
 
 data "template_file" "kubeconfig" {
   template = file("${path.module}/kubeconfig-template.yaml.tpl")
 
   vars = {
-    context                = data.google_container_cluster.primary.name
-    cluster_ca_certificate = data.google_container_cluster.primary.master_auth
-    endpoint               = data.google_container_cluster.primary.endpoint
-    token                  = data.google_client_config.default.access_token
+    context                = google_container_cluster.primary.name
+    cluster_ca_certificate = google_container_cluster.primary.master_auth
+    endpoint               = google_container_cluster.primary.endpoint
+    token                  = google_client_config.default.access_token
   }
 }
 
