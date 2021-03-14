@@ -87,9 +87,24 @@ resource "local_file" "kubeconfig" {
   filename = pathexpand("~/.kube/config")
 }  
 
+resource "kubernetes_namespace" "app" {
+  metadata {
+    annotations = {
+      name = "example-annotation"
+    }
+
+    labels = {
+      mylabel = "label-value"
+    }
+
+    name = "app"
+  }
+}
+
 resource "kubernetes_deployment" "nginx" {
   metadata {
     name = "scalable-nginx-example"
+    namespace = kubernetes_namespace.app.name
     labels = {
       App = "ScalableNginxExample"
     }
