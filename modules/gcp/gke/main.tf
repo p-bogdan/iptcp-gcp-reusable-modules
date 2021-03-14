@@ -178,7 +178,7 @@ resource "kubernetes_deployment" "nginx" {
 
 resource "kubernetes_service" "example" {
   metadata {
-    name = kubernetes_endpoints.example.metadata.0.name
+    name = kubernetes_deployment.nginx.metadata.0.name
     #name = "nginx-example"
     namespace = "app"
     labels = {
