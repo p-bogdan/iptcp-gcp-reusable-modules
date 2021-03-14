@@ -147,39 +147,39 @@ resource "kubernetes_deployment" "nginx" {
     }
   }
 }
-# resource "kubernetes_endpoints" "example" {
-#   metadata {
-#     name = "terraform-example"
-#     namespace = "app"
-#   }
+resource "kubernetes_endpoints" "example" {
+  metadata {
+    name = "terraform-example"
+    namespace = "app"
+  }
 
-#   subset {
-#     address {
-#       ip = "10.0.0.4"
-#     }
+  subset {
+    address {
+      ip = "10.0.0.4"
+    }
 
-#     address {
-#       ip = "10.0.0.5"
-#     }
+    address {
+      ip = "10.0.0.5"
+    }
 
-#     port {
-#       name     = "http"
-#       port     = 80
-#       protocol = "TCP"
-#     }
+    port {
+      name     = "http"
+      port     = 80
+      protocol = "TCP"
+    }
 
-#     port {
-#       name     = "https"
-#       port     = 443
-#       protocol = "TCP"
-#     }
-#   }
-# }
+    port {
+      name     = "https"
+      port     = 443
+      protocol = "TCP"
+    }
+  }
+}
 
 resource "kubernetes_service" "example" {
   metadata {
-    #name = kubernetes_endpoints.example.metadata.0.name
-    name = "nginx-example"
+    name = kubernetes_endpoints.example.metadata.0.name
+    #name = "nginx-example"
     namespace = "app"
     labels = {
       app = "ScalableNginxExample"
