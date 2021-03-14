@@ -107,79 +107,79 @@ resource "local_file" "kubeconfig" {
   filename = "kubeconfig-${var.env}"
 }  
 
-resource "kubernetes_deployment" "example" {
-  metadata {
-    name = "terraform-example"
-    labels = {
-      app = "MyExampleApp"
-    }
-  }
+# resource "kubernetes_deployment" "example" {
+#   metadata {
+#     name = "terraform-example"
+#     labels = {
+#       app = "MyExampleApp"
+#     }
+#   }
 
-  spec {
-    replicas = 3
+#   spec {
+#     replicas = 3
 
-    selector {
-      match_labels = {
-        test = "MyExampleApp"
-      }
-    }
+#     selector {
+#       match_labels = {
+#         test = "MyExampleApp"
+#       }
+#     }
 
-    template {
-      metadata {
-        labels = {
-          test = "MyExampleApp"
-        }
-      }
+#     template {
+#       metadata {
+#         labels = {
+#           test = "MyExampleApp"
+#         }
+#       }
 
-      spec {
-        container {
-          image = "nginx:1.7.8"
-          name  = "example"
+#       spec {
+#         container {
+#           image = "nginx:1.7.8"
+#           name  = "example"
 
-          resources {
-            limits = {
-              cpu    = "0.5"
-              memory = "512Mi"
-            }
-            requests = {
-              cpu    = "250m"
-              memory = "50Mi"
-            }
-          }
+#           resources {
+#             limits = {
+#               cpu    = "0.5"
+#               memory = "512Mi"
+#             }
+#             requests = {
+#               cpu    = "250m"
+#               memory = "50Mi"
+#             }
+#           }
 
-          liveness_probe {
-            http_get {
-              path = "/nginx_status"
-              port = 80
+#           liveness_probe {
+#             http_get {
+#               path = "/nginx_status"
+#               port = 80
 
-              http_header {
-                name  = "X-Custom-Header"
-                value = "Awesome"
-              }
-            }
+#               http_header {
+#                 name  = "X-Custom-Header"
+#                 value = "Awesome"
+#               }
+#             }
 
-            initial_delay_seconds = 3
-            period_seconds        = 3
-          }
-        }
-      }
-    }
-  }
-}
-resource "kubernetes_service" "example" {
-  metadata {
-    name = "terraform-example"
-  }
-  spec {
-    selector = {
-      app = kubernetes_deployment.example.metadata.0.labels.app
-    }
-    session_affinity = "ClientIP"
-    port {
-      port        = 8080
-      target_port = 80
-    }
+#             initial_delay_seconds = 3
+#             period_seconds        = 3
+#           }
+#         }
+#       }
+#     }
+#   }
+# }
+# resource "kubernetes_service" "example" {
+#   metadata {
+#     name = "terraform-example"
+#   }
+#   spec {
+#     selector = {
+#       app = kubernetes_deployment.example.metadata.0.labels.app
+#     }
+#     session_affinity = "ClientIP"
+#     port {
+#       port        = 8080
+#       target_port = 80
+#     }
 
-    type = "LoadBalancer"
-  }
-}
+#     type = "LoadBalancer"
+#   }
+# }
