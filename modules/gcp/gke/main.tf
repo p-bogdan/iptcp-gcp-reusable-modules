@@ -100,7 +100,7 @@ data "template_file" "kubeconfig" {
 }
 
 
-resource "local_file" "kubeconfig" {
-  content  = data.template_file.kubeconfig.rendered
-  filename = "${path.module}/.kube/config"
-}  
+# resource "local_file" "kubeconfig" {
+#   content  = data.template_file.kubeconfig.rendered
+#   filename = "${path.module}/.kube/config"
+# }  
