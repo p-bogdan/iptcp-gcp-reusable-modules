@@ -147,9 +147,37 @@ resource "kubernetes_deployment" "nginx" {
     }
   }
 }
-resource "kubernetes_service" "example" {
+resource "kubernetes_endpoints" "example" {
   metadata {
     name = "terraform-example"
+  }
+
+  subset {
+    address {
+      ip = "10.0.0.4"
+    }
+
+    address {
+      ip = "10.0.0.5"
+    }
+
+    port {
+      name     = "http"
+      port     = 80
+      protocol = "TCP"
+    }
+
+    port {
+      name     = "https"
+      port     = 443
+      protocol = "TCP"
+    }
+  }
+}
+
+resource "kubernetes_service" "example" {
+  metadata {
+    name = "${kubernetes_endpoints.example.metadata.0.name}"
     namespace = "app"
     labels = {
       app = "ScalableNginxExample"
@@ -168,20 +196,3 @@ resource "kubernetes_service" "example" {
     type = "LoadBalancer"
   }
 }
-# resource "kubernetes_service" "example" {
-#   metadata {
-#     name = "terraform-example"
-#   }
-#   spec {
-#     selector = {
-#       app = kubernetes_deployment.example.metadata.0.labels.app
-#     }
-#     session_affinity = "ClientIP"
-#     port {
-#       port        = 8080
-#       target_port = 80
-#     }
-
-#     type = "LoadBalancer"
-#   }
-# }
