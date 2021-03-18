@@ -1,6 +1,6 @@
 output "k8s-cluster-endpoint" {
     value = google_container_cluster.primary.endpoint
-     sensitive = true
+#     sensitive = true
 }
 
 output "cluster_ca_cert" {
