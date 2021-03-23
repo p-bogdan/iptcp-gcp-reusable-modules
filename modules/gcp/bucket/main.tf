@@ -1,12 +1,13 @@
-resource "google_storage_bucket" "bookshelf-data" {
-  name = "bookshelf-app-data-${var.random_id_hex}"
+resource "google_storage_bucket" "bucket" {
+  #name = "bookshelf-app-data-${var.random_id_hex}"
+  name = var.bucket_name
   location      = var.location
 }
 
 
 resource "google_storage_default_object_access_control" "public_rule" {
-  bucket = google_storage_bucket.bookshelf-data.name
-  role   = "READER"
+  bucket = google_storage_bucket.bucket.name
+  role   = var.access_bucket_role
   entity = var.entity
-  depends_on = [google_storage_bucket.bookshelf-data]
+  depends_on = [google_storage_bucket.bucket]
 }
