@@ -2,7 +2,7 @@ resource "google_storage_bucket" "bucket" {
   #name = "bookshelf-app-data-${var.random_id_hex}"
   name = var.bucket_name
   location      = var.location
-  uniform_bucket_level_access = false
+  uniform_bucket_level_access = true
 }
 
 
