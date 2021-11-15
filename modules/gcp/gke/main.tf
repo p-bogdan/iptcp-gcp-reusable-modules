@@ -6,9 +6,6 @@ resource "google_container_cluster" "primary" {
   initial_node_count       = 1
   min_master_version = var.cluster_version
   master_auth {
-     #username = ""
-     #password = ""
-
      client_certificate_config {
        issue_client_certificate = var.issue_client_certificate
      }
