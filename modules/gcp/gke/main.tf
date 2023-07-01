@@ -59,17 +59,17 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
 
 # #Retrieve authentication token
 
-#  data "google_container_cluster" "default" {
-#   name     = var.cluster_name
-#   location = var.zone
-#   project  = var.project
-#  }
-
- resource "google_container_cluster" "default" {
+ data "google_container_cluster" "primary" {
   name     = var.cluster_name
   location = var.zone
   project  = var.project
  }
+
+#  resource "google_container_cluster" "default" {
+#   name     = var.cluster_name
+#   location = var.zone
+#   project  = var.project
+#  }
  data "google_client_config" "default" {}
 
 # data "template_file" "kubeconfig" {
