@@ -52,3 +52,7 @@ variable "env" {
 variable "network" {
 default = ""
 }
+
+variable "subnetwork" {
+default = ""
+}
