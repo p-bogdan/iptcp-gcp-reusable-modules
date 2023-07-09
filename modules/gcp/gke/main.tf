@@ -5,7 +5,8 @@ resource "google_container_cluster" "primary" {
   remove_default_node_pool = var.remove_default_node_pool
   initial_node_count       = 1
   min_master_version = var.cluster_version
-  master_auth {
+  network = var.network 
+ master_auth {
      client_certificate_config {
        issue_client_certificate = var.issue_client_certificate
      }
