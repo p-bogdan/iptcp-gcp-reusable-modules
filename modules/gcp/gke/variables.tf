@@ -48,3 +48,7 @@ variable "cluster_version" {
 variable "env" {
     default = ""
 }
+
+variable "network" {
+default = ""
+}
