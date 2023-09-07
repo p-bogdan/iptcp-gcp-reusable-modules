@@ -50,4 +50,8 @@ description = "List of CIDR block ranges"
 default      = [""]
 }
 
-
+variable "target_tags" {
+type        = list(string)
+description = "List of target tags to allow traffic"
+default     = [""]
+}

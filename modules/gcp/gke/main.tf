@@ -7,6 +7,7 @@ resource "google_container_cluster" "primary" {
   min_master_version = var.cluster_version
   network = var.network
   subnetwork = var.subnetwork 
+  tags = var.gke_tags
  master_auth {
      client_certificate_config {
        issue_client_certificate = var.issue_client_certificate

@@ -2,6 +2,13 @@ variable "zone" {
     default = ""
 }
 
+variable "gke_tags" {
+type        = list(string)
+description = "List of gke tags to allow traffic"
+default     = [""]
+}
+
+
 variable "project" {
     default = ""
 }

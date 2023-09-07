@@ -23,7 +23,8 @@ resource "google_compute_firewall" "internal-routing" {
   network       = google_compute_network.gcp-lab-network.self_link
   source_ranges = var.source_ranges
   project       = var.project
-  target_tags   = ["load-balanced-backend", "allow-health-check", "allow-ssh"]
+  #target_tags   = ["load-balanced-backend", "allow-health-check", "allow-ssh"]
+  target_tags = var.target_tags
 
   allow {
     protocol = "tcp"
