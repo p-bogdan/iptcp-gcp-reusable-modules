@@ -7,7 +7,7 @@ resource "google_container_cluster" "primary" {
   min_master_version = var.cluster_version
   network = var.network
   subnetwork = var.subnetwork 
-  tags = var.gke_tags
+  #tags = var.gke_tags
  master_auth {
      client_certificate_config {
        issue_client_certificate = var.issue_client_certificate
@@ -52,6 +52,7 @@ resource "google_container_node_pool" "primary_preemptible_nodes" {
         "team"        = "devops"
       }
 
+  tags = var.gke_tags
     oauth_scopes = [
 
       "https://www.googleapis.com/auth/cloud-platform"
