@@ -1,3 +1,11 @@
+output "k8s_network" {
+  value = google_container_cluster.primary.network
+}
+
+output "k8s_subnetwork" {
+  value = google_container_cluster.primary.subnetwork
+}
+
 output "k8s-cluster-endpoint" {
     value = google_container_cluster.primary.endpoint
 #     sensitive = true
