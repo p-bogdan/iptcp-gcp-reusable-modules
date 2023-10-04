@@ -8,7 +8,7 @@ resource "google_compute_network" "gcp-lab-network" {
 }
 
 resource "google_compute_subnetwork" "gcp-lab-subnet" {
-  name          = "gcp-lab-backend-subnet"
+  name          = var.subnetwork_name
   ip_cidr_range = var.ipv4_range_backends
   region        = var.region
   project       = var.project
