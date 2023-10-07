@@ -63,3 +63,8 @@ default = ""
 variable "subnetwork" {
 default = ""
 }
+
+variable "context" {
+type = string
+default = ""
+}
